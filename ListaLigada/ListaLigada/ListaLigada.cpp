@@ -145,12 +145,54 @@ void inserirElemento()
 
 void excluirElemento()
 {
-	
-}
+		int excluir;
+		cout << "Digite o numero que deseja excluir: ";
+		cin >> excluir;
+
+		NO* anterior = NULL;
+		NO* atual = primeiro;
+
+		// Procura o elemento a ser deletado
+		while (atual != NULL && atual->valor != excluir) {
+			anterior = atual;
+			atual = atual->prox;
+		}
+
+		if (atual == NULL) {
+			cout << "O valor digitado nao existe." << endl;
+			return;
+		}
+
+		// Remove o elemento da lista
+		if (anterior == NULL) {
+			// Se o elemento a ser deletado for o primeiro
+			primeiro = atual->prox;
+		}
+		else {
+			anterior->prox = atual->prox;
+		}
+
+		// Libere a memória ocupada pelo elemento excluído
+		free(atual);
+
+		cout << "Elemento " << excluir << " removido com sucesso." << endl;
+	}
+
 
 void buscarElemento()
 {
-	
+	int buscar;
+	cout << "Digite o numero que deseja buscar: ";
+	cin >> buscar;
+	NO* valorBuscar = posicaoElemento(buscar);
+	if (valorBuscar != NULL)
+	{
+		cout << valorBuscar->valor << endl;
+	}
+	else
+	{
+		cout << "O valor digitado nao existe." << endl;
+	}
 }
 
 
