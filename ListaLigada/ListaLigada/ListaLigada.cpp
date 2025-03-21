@@ -73,7 +73,7 @@ void menu()
 void inicializar()
 {
 
-	// se a lista j� possuir elementos
+	// se a lista já possuir elementos
 	// libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -147,67 +147,70 @@ void excluirElemento()
 {
 		int excluir;
 		cout << "Digite o numero que deseja excluir: ";
-		cin >> excluir;
+		cin >> excluir; // Lê o número que o usuário deseja excluir
 
 		NO* anterior = NULL;
-		NO* atual = primeiro;
+		NO* atual = primeiro; // Inicializa o ponteiro 'atual' com o primeiro nó da lista
 
 		// Procura o elemento a ser deletado
 		while (atual != NULL && atual->valor != excluir) {
-			anterior = atual;
-			atual = atual->prox;
+			anterior = atual; // Atualiza o ponteiro 'anterior' para o nó atual
+			atual = atual->prox; // Avança para o próximo nó na lista
 		}
 
+		// Verifica se o elemento foi encontrado
 		if (atual == NULL) {
 			cout << "O valor digitado nao existe." << endl;
-			return;
+			return; // Sai da função se o elemento não foi encontrado
 		}
 
 		// Remove o elemento da lista
 		if (anterior == NULL) {
 			// Se o elemento a ser deletado for o primeiro
-			primeiro = atual->prox;
+			primeiro = atual->prox; // Atualiza o ponteiro 'primeiro' para o próximo nó
 		}
 		else {
-			anterior->prox = atual->prox;
+			anterior->prox = atual->prox; // Faz o nó anterior apontar para o próximo nó, pulando o nó atual
 		}
 
-		// Libere a mem�ria ocupada pelo elemento exclu�do
+		// Libera a memória ocupada pelo elemento excluído
 		free(atual);
 
 		cout << "Elemento " << excluir << " removido com sucesso." << endl;
-	}
+}
+
 
 
 void buscarElemento()
 {
 	int buscar;
 	cout << "Digite o numero que deseja buscar: ";
-	cin >> buscar;
-	NO* valorBuscar = posicaoElemento(buscar);
+	cin >> buscar; // Lê o número que o usuário deseja buscar
+
+	NO* valorBuscar = posicaoElemento(buscar); // Chama a função para encontrar o nó com o valor buscado
+
+	// Verifica se o elemento foi encontrado
 	if (valorBuscar != NULL)
 	{
-		cout << valorBuscar->valor << endl;
+		cout << valorBuscar->valor << endl; // Exibe o valor do nó encontrado
 	}
 	else
 	{
-		cout << "O valor digitado nao existe." << endl;
+		cout << "O valor digitado nao existe." << endl; // Informa que o valor não foi encontrado
 	}
 }
 
-
-
-// retorna um ponteiro para o elemento buscado
-// ou NULL se o elemento n�o estiver na lista
 NO* posicaoElemento(int numero)
 {
-	NO* aux = primeiro;
+	NO* aux = primeiro; // Inicializa o ponteiro 'aux' com o primeiro nó da lista
+
+	// Percorre a lista procurando o valor
 	while (aux != NULL) {
-		if (aux->valor == numero)
+		if (aux->valor == numero) // Verifica se o valor do nó atual é igual ao valor buscado
 		{
-			break;
+			break; // Sai do loop se o valor for encontrado
 		}
-		aux = aux->prox;
+		aux = aux->prox; // Avança para o próximo nó na lista
 	}
-	return aux;
+	return aux; // Retorna o ponteiro para o nó encontrado ou NULL se não encontrado
 }
